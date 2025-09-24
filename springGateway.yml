@@ -7,4 +7,12 @@ spring:
             allowedOrigins: "*"
             allowedMethods: GET, POST, PUT, DELETE, OPTIONS
             allowedHeaders: "*"
-         
+      routes:
+        - id: auth_route
+          uri: lb://authservice
+          predicates:
+            - Path=/api/au/**
+        - id: booking_route
+          uri: lb://bookingservice
+          predicates:
+            - Path=/api/book/**   
