@@ -1,22 +1,24 @@
 spring:
   cloud:
     gateway:
-      globalcors:
-        cors-configurations:
-          '[/**]':  # Applies to all paths
-            allowedOrigins: "*"
-            allowedMethods: GET, POST, PUT, DELETE, OPTIONS
-            allowedHeaders: "*"
-      routes:
-        - id: auth_route
-          uri: lb://authservice
-          predicates:
-            - Path=/api/auth/**
-          filters:
-            - StripPrefix=1  
-        - id: booking_route
-          uri: lb://bookingservice
-          predicates:
-            - Path=/api/booking/**   
-          filters:
-            - StripPrefix=1  
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':  # Applies to all paths
+                allowedOrigins: "*"
+                allowedMethods: GET, POST, PUT, DELETE, OPTIONS
+                allowedHeaders: "*"
+          routes:
+            - id: auth_route
+              uri: lb://authservice
+              predicates:
+                - Path=/api/auth/**
+              filters:
+                - StripPrefix=1  
+            - id: booking_route
+              uri: lb://bookingservice
+              predicates:
+                - Path=/api/booking/**   
+              filters:
+                - StripPrefix=1  
