@@ -11,8 +11,12 @@ spring:
         - id: auth_route
           uri: lb://authservice
           predicates:
-            - Path=/api/au/**
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1  
         - id: booking_route
           uri: lb://bookingservice
           predicates:
-            - Path=/api/book/**   
+            - Path=/api/booking/**   
+          filters:
+            - StripPrefix=1  
